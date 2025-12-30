@@ -1,4 +1,4 @@
-// Composable สำหรับจัดการประวัติบิล
+// Composable สำหรับจัดการประวัติบิล (ระบบขายปลา)
 import type { CartItem } from './useCart'
 
 export interface Bill {
@@ -6,9 +6,10 @@ export interface Bill {
   timestamp: number
   items: CartItem[]
   totalPrice: number
+  totalWeight: number
 }
 
-const STORAGE_KEY = 'isan-bills'
+const STORAGE_KEY = 'fish-shop-bills'
 
 export const useBills = () => {
   const bills = useState<Bill[]>('bills', () => [])
@@ -32,11 +33,13 @@ export const useBills = () => {
 
   // สร้างบิลใหม่
   const createBill = (items: CartItem[], totalPrice: number) => {
+    const totalWeight = items.reduce((sum, item) => sum + item.weight, 0)
     const newBill: Bill = {
       id: Date.now().toString(),
       timestamp: Date.now(),
       items: [...items],
-      totalPrice
+      totalPrice,
+      totalWeight: Number(totalWeight.toFixed(2))
     }
     bills.value.unshift(newBill)
     saveBills()
@@ -58,6 +61,17 @@ export const useBills = () => {
     return bills.value
       .filter(bill => bill.timestamp >= todayStart)
       .reduce((sum, bill) => sum + bill.totalPrice, 0)
+  })
+
+  // น้ำหนักรวมวันนี้
+  const dailyWeight = computed(() => {
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    const todayStart = today.getTime()
+
+    return bills.value
+      .filter(bill => bill.timestamp >= todayStart)
+      .reduce((sum, bill) => sum + bill.totalWeight, 0)
   })
 
   // จำนวนบิลวันนี้
@@ -89,14 +103,21 @@ export const useBills = () => {
     }).format(price)
   }
 
+  // Format น้ำหนัก
+  const formatWeight = (weight: number) => {
+    return `${weight.toFixed(2)} กก.`
+  }
+
   return {
     bills,
     dailyTotal,
+    dailyWeight,
     todayBillCount,
     loadBills,
     createBill,
     deleteBill,
     formatDate,
-    formatPrice
+    formatPrice,
+    formatWeight
   }
 }

@@ -17,18 +17,40 @@ export default {
         sans: ['Sarabun', 'sans-serif']
       },
       colors: {
-        amber: {
-          50: '#FFFBEB',
-          100: '#FEF3C7',
-          200: '#FDE68A',
-          300: '#FCD34D',
-          400: '#FBBF24',
-          500: '#F59E0B',
-          600: '#D97706',
-          700: '#B45309',
-          800: '#92400E',
-          900: '#78350F',
-          950: '#451A03'
+        primary: {
+          50: '#F0F9FF',
+          100: '#E0F2FE',
+          200: '#BAE6FD',
+          300: '#7DD3FC',
+          400: '#38BDF8',
+          500: '#0EA5E9',
+          600: '#0284C7',
+          700: '#0369A1',
+          800: '#075985',
+          900: '#0C4A6E'
+        },
+        accent: {
+          50: '#F0F9FF',
+          100: '#E0F2FE',
+          200: '#BAE6FD',
+          300: '#7DD3FC',
+          400: '#38BDF8',
+          500: '#0EA5E9',
+          600: '#0284C7',
+          700: '#0369A1',
+          800: '#075985',
+          900: '#0C4A6E'
+        }
+      },
+      animation: {
+        'float': 'float 6s ease-in-out infinite',
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'bounce-slow': 'bounce 3s ease-in-out infinite'
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' }
         }
       }
     }
@@ -37,26 +59,28 @@ export default {
   daisyui: {
     themes: [
       {
-        isanTheme: {
-          'primary': '#F59E0B',
-          'primary-content': '#451A03',
-          'secondary': '#D97706',
-          'secondary-content': '#FFFBEB',
-          'accent': '#FBBF24',
-          'accent-content': '#78350F',
-          'neutral': '#1f2937',
-          'neutral-content': '#f9fafb',
-          'base-100': '#fffbeb',
-          'base-200': '#fef3c7',
-          'base-300': '#fde68a',
-          'base-content': '#78350F',
-          'info': '#3ABFF8',
-          'success': '#36D399',
-          'warning': '#FBBD23',
-          'error': '#F87272'
+        skyLight: {
+          'primary': '#0EA5E9',
+          'primary-content': '#FFFFFF',
+          'secondary': '#38BDF8',
+          'secondary-content': '#FFFFFF',
+          'accent': '#06B6D4',
+          'accent-content': '#FFFFFF',
+          'neutral': '#1E293B',
+          'neutral-content': '#F8FAFC',
+          'base-100': '#FFFFFF',
+          'base-200': '#F0F9FF',
+          'base-300': '#E0F2FE',
+          'base-content': '#0F172A',
+          'info': '#0EA5E9',
+          'success': '#22C55E',
+          'warning': '#F59E0B',
+          'error': '#EF4444'
         }
       }
     ],
     darkTheme: false
   }
 } satisfies Config
+
+
